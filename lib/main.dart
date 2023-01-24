@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rsm/globals.dart';
-import 'package:rsm/home_view.dart';
+import 'package:rsm/view/home_view.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'Random Sammich Maker',
       theme: ThemeData(
         backgroundColor: const Color(0xffE3D3C1),
         primaryColor: const Color(0xffEEBA3F),

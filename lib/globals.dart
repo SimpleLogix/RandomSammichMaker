@@ -8,4 +8,6 @@ class MyColors {
   static const primary = Color(0xffA9A761);
   static const darkAccent = Color(0xffA16F40);
   static const darkShade = Color(0xff473D3A);
+
+  static const bgGrey = Color(0xff272B30);
 }
