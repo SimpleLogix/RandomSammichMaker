@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:rsm/logic/sammich_logic.dart';
+import 'package:rsm/model/filters.dart';
+import 'package:rsm/model/sammich.dart';
 import 'package:rsm/view/filters_view.dart';
 import 'package:rsm/view/history_view.dart';
 import 'package:rsm/view/sub_view.dart';
@@ -14,6 +17,17 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   bool isRefreshed = false;
+  late Sammich rngSammich;
+
+  @override
+  void initState() {
+    super.initState();
+
+    // create a random sammich
+    Filters defaultFilter = Filters();
+    rngSammich = SammichLogic.rngSammich(defaultFilter);
+  }
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -86,10 +100,10 @@ class _HomeViewState extends State<HomeView> {
                             alignment: Alignment.topLeft,
                             origin: Offset(size.width * 3 / 4, 75),
                             child: AlertDialog(
-                              backgroundColor: MyColors.bgGrey, 
+                              backgroundColor: MyColors.bgGrey,
                               alignment: Alignment.bottomCenter,
                               insetPadding: EdgeInsets.fromLTRB(10, 0, 10, 10),
-                              title: const Center( 
+                              title: const Center(
                                 child: Text(
                                   "History",
                                   style: TextStyle(color: MyColors.lightShade),
@@ -122,8 +136,8 @@ class _HomeViewState extends State<HomeView> {
           Expanded(
             child: Container(
               alignment: Alignment.center,
-              color: isRefreshed? MyColors.lightAccent : MyColors.primary,
-              child: const SubView(),
+              color: isRefreshed ? MyColors.lightAccent : MyColors.primary,
+              child: SubView(sammich: rngSammich),
             ),
           ),
           Padding(
@@ -135,11 +149,12 @@ class _HomeViewState extends State<HomeView> {
                 setState(() {
                   // TODO : yeah something here ...
                   isRefreshed = !isRefreshed;
+                  rngSammich = SammichLogic.rngSammich(Filters());
                 });
               },
               icon: Icon(
                 Icons.refresh_outlined,
-                color: isRefreshed? MyColors.lightAccent : MyColors.primary,
+                color: isRefreshed ? MyColors.lightAccent : MyColors.primary,
               ),
             ),
           ),
