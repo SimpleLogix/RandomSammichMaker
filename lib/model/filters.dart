@@ -32,6 +32,7 @@ class Filters {
       'Steak': true,
       'Tuna': true,
       'Turkey & Ham': true,
+      'Veggie/No Protein': true,
     },
     this.selectedCheese = const {
       'American': true,
@@ -76,4 +77,87 @@ class Filters {
       'Parm': true,
     },
   });
+
+  factory Filters.fromJson(Map<String, dynamic> json) {
+    return Filters(
+      selectedBread: json['selectedBread'],
+      numProtein: json['numProtein'],
+      selectedProtein: json['selectedProtein'],
+      selectedCheese: json['selectedCheese'],
+      numVeggies: json['numVeggies'],
+      selectedVeggies: json['selectedVeggies'],
+      numSauce: json['numSauce'], 
+      selectedSauce: json['selectedSauce'],
+      numToppings: json['numToppings'],
+      selectedToppings: json['selectedToppings'],
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'selectedBread': {
+        'Italian': selectedBread['Italian'],
+        'Italian Herbs & Cheese': selectedBread['Italian Herbs & Cheese'],
+        'Multigrain': selectedBread['Multigrain'],
+        'Flatbread': selectedBread['Flatbread'],
+        'Wrap': selectedBread['Wrap'],
+        'Bowl': selectedBread['Bowl'],
+      },
+      'numProtein': numProtein,
+      'selectedProtein': {
+        'Turkey': selectedProtein['Turkey'],
+        'Grilled Chicken': selectedProtein['Grilled Chicken'],
+        'Rotisserie Chicken': selectedProtein['Rotisserie Chicken'],
+        'Teriyaki Chicken': selectedProtein['Teriyaki Chicken'],
+        'Buffalo Chicken': selectedProtein['Buffalo Chicken'],
+        'Ham': selectedProtein['Ham'],
+        'Steak': selectedProtein['Steak'],
+        'Tuna': selectedProtein['Tuna'],
+        'Turkey & Ham': selectedProtein['Turkey & Ham'],
+        'Veggie/No Protein': selectedProtein['Veggie/No Protein'],
+      },
+      'selectedCheese': {
+        'American': selectedCheese['American'],
+        'Provolone': selectedCheese['Provolone'],
+        'PepperJack': selectedCheese['PepperJack'],
+        'Cheddar': selectedCheese['Cheddar'],
+        'Mozzarella': selectedCheese['Mozzarella'],
+      },
+      'numVeggies': numVeggies,
+      'selectedVeggies': {
+        'Lettuce': selectedVeggies['Lettuce'],
+        'Spinach': selectedVeggies['Spinach'],
+        'Tomatoes': selectedVeggies['Tomatoes'],
+        'Cucumbers': selectedVeggies['Cucumbers'],
+        'Onions': selectedVeggies['Onions'],
+        'Green Peppers': selectedVeggies['Green Peppers'],
+        'Olives': selectedVeggies['Olives'],
+        'Banana Peppers': selectedVeggies['Banana Peppers'],
+        'Pickles': selectedVeggies['Pickles'],
+        'Jalapenos': selectedVeggies['Jalapenos'],
+      },
+      'numSauce': numSauce,
+      'selectedSauce': {
+        'Mayo': selectedSauce['Mayo'],
+        'Chipotle': selectedSauce['Chipotle'],
+        'Honey Mustard': selectedSauce['Honey Mustard'],
+        'Ranch': selectedSauce['Ranch'],
+        'Sweet Onion': selectedSauce['Sweet Onion'],
+        'Buffalo': selectedSauce['Buffalo'],
+        'Mustard': selectedSauce['Mustard'],
+        'Vinaigrette': selectedSauce['Vinaigrette'],
+        'Garlic Aioli': selectedSauce['Garlic Aioli'],
+        'Oil': selectedSauce['Oil'],
+        'Vinegar': selectedSauce['Vinegar'],
+      },
+      'numToppings': numToppings,
+      'selectedToppings': {
+        'Salt': selectedToppings['Salt'],
+        'Pepper': selectedToppings['Pepper'],
+        'Salt & Pepper': selectedToppings['Salt & Pepper'],
+        'Oregano': selectedToppings['Oregano'],
+        'Parm': selectedToppings['Parm'],
+      },
+    };
+  }
 }

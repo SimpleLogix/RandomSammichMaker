@@ -42,39 +42,16 @@ class _HomeViewState extends State<HomeView> {
               children: [
                 ElevatedButton(
                   onPressed: () {
-                    showGeneralDialog(
+                    showModalBottomSheet(
                         context: context,
-                        barrierDismissible: true,
-                        barrierLabel: "Barrier",
-                        barrierColor: Colors.black.withOpacity(0.5),
-                        transitionDuration: const Duration(milliseconds: 200),
-                        transitionBuilder: (ctx, a1, a2, child) {
-                          var curve = Curves.easeInOut.transform(a1.value);
-                          return Transform.scale(
-                            scale: curve,
-                            alignment: Alignment.topLeft,
-                            origin: Offset(size.width * 1 / 4, 75),
-                            child: AlertDialog(
-                              backgroundColor: MyColors.bgGrey,
-                              alignment: Alignment.bottomCenter,
-                              insetPadding: EdgeInsets.fromLTRB(10, 0, 10, 10),
-                              title: const Center(
-                                child: Text(
-                                  "Filters",
-                                  style: TextStyle(color: MyColors.lightShade),
-                                ),
-                              ),
-                              content: Container(
-                                height: size.height * 2 / 3,
-                                width: size.width,
-                                child: const FiltersView(),
-                              ),
-                            ),
+                        builder: (context) {
+                          return Container(
+                            color: MyColors.bgGrey,
+                            height: size.height,
+                            width: size.width,
+                            child: const FiltersView(),
                           );
-                        },
-                        pageBuilder: (_, __, ___) {
-                          return Container();
-                        }); // showGeneralDialogue()
+                        });
                   },
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(horizontal: 60),

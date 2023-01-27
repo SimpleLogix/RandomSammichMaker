@@ -2,6 +2,8 @@ import 'package:rsm/model/filters.dart';
 import 'package:rsm/model/sammich.dart';
 import 'dart:math';
 
+import 'package:shared_preferences/shared_preferences.dart';
+
 class SammichLogic {
   //
   /// create a random sammich based on the given filters
@@ -67,4 +69,6 @@ class SammichLogic {
         toppings: toppings);
     return rngSammich;
   }
+
+
 }
