@@ -11,7 +11,7 @@ class SammichLogic {
     var rng = new Random();
 
     // choosing bread
-    List<String> breads = filter.selectedBread.entries
+    List<String> breads = filter.selectedBread!.entries
         .where((e) => e.value == true)
         .map((e) => e.key)
         .toList();
@@ -20,23 +20,25 @@ class SammichLogic {
 
     // choosing protein
     List<String> proteins = [];
-    filter.selectedProtein.forEach((key, value) {
+    filter.selectedProtein!.forEach((key, value) {
       if (value) {
         proteins.add(key);
       }
     });
     proteins.shuffle();
-    proteins = proteins.sublist(0, filter.numProtein);
+    if (filter.numProtein < proteins.length) {
+     proteins = proteins.sublist(0, filter.numProtein);
+    }
 
     // choosing cheese
-    List<String> cheeses = filter.selectedCheese.entries
+    List<String> cheeses = filter.selectedCheese!.entries
         .where((e) => e.value == true)
         .map((e) => e.key)
         .toList();
     String cheese = cheeses[rng.nextInt(cheeses.length)];
 
     // choosing veggies
-    List<String> veggies = filter.selectedVeggies.entries
+    List<String> veggies = filter.selectedVeggies!.entries
         .where((e) => e.value == true)
         .map((e) => e.key)
         .toList();
@@ -44,7 +46,7 @@ class SammichLogic {
     veggies = veggies.sublist(0, filter.numVeggies);
 
     // choosing sauces
-    List<String> sauces = filter.selectedSauce.entries
+    List<String> sauces = filter.selectedSauce!.entries
         .where((e) => e.value == true)
         .map((e) => e.key)
         .toList();
@@ -52,7 +54,7 @@ class SammichLogic {
     sauces = sauces.sublist(0, filter.numSauce);
 
     // choosing sauces
-    List<String> toppings = filter.selectedToppings.entries
+    List<String> toppings = filter.selectedToppings!.entries
         .where((e) => e.value == true)
         .map((e) => e.key)
         .toList();
