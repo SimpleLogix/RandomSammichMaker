@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:rsm/globals.dart';
 import 'package:rsm/logic/shared_prefs.dart';
 import 'package:rsm/model/sammich.dart';
 
@@ -17,15 +16,14 @@ class _SubViewState extends State<SubView> {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint(isSaved.toString());
     final sammichText =
         "${widget.sammich.bread}\n${widget.sammich.cheese}\n${widget.sammich.veggies.join(' - ')}\n${widget.sammich.protein.join(' - ')}\n${widget.sammich.sauces.join(' - ')}\n${widget.sammich.toppings.join(' - ')}";
-    return Container(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(sammichText),
-          IconButton(
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        Align(
+          alignment: Alignment.topRight,
+          child: IconButton(
               onPressed: () {
                 setState(() {
                   if (isSaved) {
@@ -43,16 +41,21 @@ class _SubViewState extends State<SubView> {
                 isSaved ? Icons.star : Icons.star_border,
                 color: Colors.amber[600],
               )),
-          TextButton(
-            child: Text("Clear"),
-            onPressed: () async {
-              isSaved = false;
-              widget.saved.clear();
-              SharedPrefsLogic.clear();
-            },
-          ),
-        ],
-      ),
+        ),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(20, 50, 20, 50),
+          child: Text(sammichText),
+        ),
+        
+        TextButton(
+          child: Text("Clear"),
+          onPressed: () async {
+            isSaved = false;
+            widget.saved.clear();
+            SharedPrefsLogic.clear();
+          },
+        ),
+      ],
     );
   }
 }
