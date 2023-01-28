@@ -34,7 +34,7 @@ class _FiltersViewState extends State<FiltersView> {
             children: filters.selectedBread.keys.map((String filter) {
               return FilterChip(
                 label: Text(filter, style: const TextStyle(fontSize: 13)),
-                selected: filters.selectedBread[filter]!,
+                selected: filters.selectedBread[filter] ?? false,
                 onSelected: (bool value) {
                   setState(() {
                     filters.selectedBread[filter] = value;
@@ -56,7 +56,7 @@ class _FiltersViewState extends State<FiltersView> {
             children: filters.selectedProtein.keys.map((String filter) {
               return FilterChip(
                 label: Text(filter, style: const TextStyle(fontSize: 12)),
-                selected: filters.selectedProtein[filter]!,
+                selected: filters.selectedProtein[filter] ?? false,
                 onSelected: (bool value) {
                   setState(() {
                     filters.selectedProtein[filter] = value;
@@ -91,7 +91,7 @@ class _FiltersViewState extends State<FiltersView> {
             children: filters.selectedCheese.keys.map((String filter) {
               return FilterChip(
                 label: Text(filter, style: const TextStyle(fontSize: 12)),
-                selected: filters.selectedCheese[filter]!,
+                selected: filters.selectedCheese[filter] ?? false,
                 onSelected: (bool value) {
                   setState(() {
                     filters.selectedCheese[filter] = value;
@@ -115,7 +115,7 @@ class _FiltersViewState extends State<FiltersView> {
             children: filters.selectedVeggies.keys.map((String filter) {
               return FilterChip(
                 label: Text(filter, style: const TextStyle(fontSize: 12)),
-                selected: filters.selectedVeggies[filter]!,
+                selected: filters.selectedVeggies[filter] ?? false,
                 onSelected: (bool value) {
                   setState(() {
                     filters.selectedVeggies[filter] = value;
@@ -149,7 +149,7 @@ class _FiltersViewState extends State<FiltersView> {
             children: filters.selectedSauce.keys.map((String filter) {
               return FilterChip(
                 label: Text(filter, style: const TextStyle(fontSize: 12)),
-                selected: filters.selectedSauce[filter]!,
+                selected: filters.selectedSauce[filter] ?? false,
                 onSelected: (bool value) {
                   setState(() {
                     filters.selectedSauce[filter] = value;
@@ -184,7 +184,7 @@ class _FiltersViewState extends State<FiltersView> {
             children: filters.selectedToppings.keys.map((String filter) {
               return FilterChip(
                 label: Text(filter, style: const TextStyle(fontSize: 12)),
-                selected: filters.selectedToppings[filter]!,
+                selected: filters.selectedToppings[filter] ?? false,
                 onSelected: (bool value) {
                   setState(() {
                     filters.selectedToppings[filter] = value;
