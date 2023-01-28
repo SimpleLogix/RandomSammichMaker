@@ -87,5 +87,7 @@ class SharedPrefsLogic {
     final prefs = await SharedPreferences.getInstance();
     prefs.remove("saved");
     prefs.remove("userHasSaved");
+    prefs.remove("filters");
+    prefs.remove("userHasFilters");
   }
 }
