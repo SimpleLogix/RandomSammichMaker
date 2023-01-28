@@ -4,7 +4,6 @@ import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPrefsLogic {
-
   /// checks if user launched app previously and
   /// sets default filter for new users
   /// returns existing one for current/saved users
@@ -31,14 +30,62 @@ class SharedPrefsLogic {
     }
   }
 
-  static updateFilters(String filter, String? subFilter, dynamic value) async {
-    final prefs = await SharedPreferences.getInstance();
-    
-  }
-
   static setFilters(Filters filters) async {
     final prefs = await SharedPreferences.getInstance();
     final stringFilters = jsonEncode(filters.toMap());
     prefs.setString("filters", stringFilters);
+  }
+
+  static Future<List<String>> getSaved() async {
+    final prefs = await SharedPreferences.getInstance();
+    final hasHistory = prefs.getBool("userHasSaved");
+    if (hasHistory != null) {
+      final saved = prefs.getStringList("saved")!;
+      return saved;
+    } else {
+      return [];
+    }
+  }
+
+  static addToSaved(String value) async {
+    final prefs = await SharedPreferences.getInstance();
+    final hasHistory = prefs.getBool("userHasSaved");
+    if (hasHistory != null) {
+      var saved = prefs.getStringList("saved")!;
+      saved.add(value);
+      prefs.setStringList("saved", saved);
+    } else {
+      prefs.setStringList("saved", [value]);
+      prefs.setBool("userHasSaved", true);
+    }
+  }
+
+  static Future<Map<String, dynamic>> getPrefsData() async {
+    Filters filters = await getFilters();
+    List<String> saved = await getSaved();
+    return {
+      'filters': filters.toMap(),
+      'saved': saved,
+    };
+  }
+
+  static removeSavedIndex(int index) async {
+    final prefs = await SharedPreferences.getInstance();
+    var saved = prefs.getStringList("saved");
+    saved!.removeAt(index);
+    prefs.setStringList("saved", saved);
+  }
+
+  static removeLastSaved() async {
+    final prefs = await SharedPreferences.getInstance();
+    var saved = prefs.getStringList("saved");
+    saved!.removeLast();
+    prefs.setStringList("saved", saved);
+  }
+
+  static clear() async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.remove("saved");
+    prefs.remove("userHasSaved");
   }
 }

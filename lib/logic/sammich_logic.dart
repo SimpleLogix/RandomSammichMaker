@@ -2,8 +2,6 @@ import 'package:rsm/model/filters.dart';
 import 'package:rsm/model/sammich.dart';
 import 'dart:math';
 
-import 'package:shared_preferences/shared_preferences.dart';
-
 class SammichLogic {
   //
   /// create a random sammich based on the given filters
@@ -43,7 +41,9 @@ class SammichLogic {
         .map((e) => e.key)
         .toList();
     veggies.shuffle();
-    veggies = veggies.sublist(0, filter.numVeggies);
+    if (filter.numVeggies < veggies.length) {
+      veggies = veggies.sublist(0, filter.numVeggies);
+    }
 
     // choosing sauces
     List<String> sauces = filter.selectedSauce!.entries
@@ -51,7 +51,9 @@ class SammichLogic {
         .map((e) => e.key)
         .toList();
     sauces.shuffle();
-    sauces = sauces.sublist(0, filter.numSauce);
+    if (filter.numSauce < sauces.length) {
+      sauces = sauces.sublist(0, filter.numSauce);
+    }
 
     // choosing sauces
     List<String> toppings = filter.selectedToppings!.entries
@@ -59,7 +61,9 @@ class SammichLogic {
         .map((e) => e.key)
         .toList();
     toppings.shuffle();
-    toppings = toppings.sublist(0, filter.numToppings);
+    if (filter.numToppings < toppings.length) {
+      toppings = toppings.sublist(0, filter.numToppings);
+    }
 
     // create a random sammich:
     Sammich rngSammich = Sammich(

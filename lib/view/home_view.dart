@@ -3,7 +3,7 @@ import 'package:rsm/logic/sammich_logic.dart';
 import 'package:rsm/model/filters.dart';
 import 'package:rsm/model/sammich.dart';
 import 'package:rsm/view/filters_view.dart';
-import 'package:rsm/view/history_view.dart';
+import 'package:rsm/view/saved_view.dart';
 import 'package:rsm/view/sub_view.dart';
 
 import '../globals.dart';
@@ -17,24 +17,29 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
+  final String version = "RSM v0.7";
   bool isRefreshed = false;
   late Sammich rngSammich;
-
+  late Filters filters;
+  late List<String> saved;
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+
     return SafeArea(
-      child: FutureBuilder<Filters>(
-          future: SharedPrefsLogic.getFilters(),
+      child: FutureBuilder(
+          future: SharedPrefsLogic.getPrefsData(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(
                 child: CircularProgressIndicator(),
               );
             } else {
+              filters = Filters.fromJson(snapshot.data!['filters']);
+              saved = snapshot.data!['saved'];
               // get a random sanwhich with the filters
-              rngSammich = SammichLogic.rngSammich(snapshot.data!);
-
+              rngSammich = SammichLogic.rngSammich(filters);
+              debugPrint(saved.length.toString());
               return Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -59,11 +64,11 @@ class _HomeViewState extends State<HomeView> {
                                     color: MyColors.bgGrey,
                                     height: size.height * 0.85,
                                     width: size.width,
-                                    child: FiltersView(filters: snapshot.data!),
+                                    child: FiltersView(filters: filters),
                                   );
                                 }).whenComplete(() {
-                                  //SharedPrefsLogic.setFilters(filters)
-                                });
+                              //SharedPrefsLogic.setFilters(filters)
+                            });
                           },
                           style: ElevatedButton.styleFrom(
                             padding: const EdgeInsets.symmetric(horizontal: 60),
@@ -97,7 +102,7 @@ class _HomeViewState extends State<HomeView> {
                                           EdgeInsets.fromLTRB(10, 0, 10, 10),
                                       title: const Center(
                                         child: Text(
-                                          "History",
+                                          "Saved",
                                           style: TextStyle(
                                               color: MyColors.lightShade),
                                         ),
@@ -105,7 +110,7 @@ class _HomeViewState extends State<HomeView> {
                                       content: Container(
                                         height: size.height * 2 / 3,
                                         width: size.width,
-                                        child: const HistoryView(),
+                                        child: SavedView(saved: saved),
                                       ),
                                     ),
                                   );
@@ -121,7 +126,7 @@ class _HomeViewState extends State<HomeView> {
                               borderRadius: BorderRadius.circular(10),
                             ),
                           ),
-                          child: const Text("History"),
+                          child: const Text("Saved"),
                         ),
                       ],
                     ),
@@ -131,7 +136,7 @@ class _HomeViewState extends State<HomeView> {
                       alignment: Alignment.center,
                       color:
                           isRefreshed ? MyColors.lightAccent : MyColors.primary,
-                      child: SubView(sammich: rngSammich),
+                      child: SubView(sammich: rngSammich, saved: saved),
                     ),
                   ),
                   Padding(
@@ -143,7 +148,7 @@ class _HomeViewState extends State<HomeView> {
                         setState(() {
                           // TODO : yeah something here ...
                           isRefreshed = !isRefreshed;
-                          rngSammich = SammichLogic.rngSammich(snapshot.data!);
+                          rngSammich = SammichLogic.rngSammich(filters);
                         });
                       },
                       icon: Icon(
@@ -154,9 +159,9 @@ class _HomeViewState extends State<HomeView> {
                       ),
                     ),
                   ),
-                  const Align(
+                  Align(
                     alignment: Alignment.bottomRight,
-                    child: Text("RSM v0.1"),
+                    child: Text(version),
                   )
                 ],
               );
