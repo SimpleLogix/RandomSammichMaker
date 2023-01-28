@@ -31,13 +31,13 @@ class _FiltersViewState extends State<FiltersView> {
             spacing: 5,
             alignment: WrapAlignment.center,
             direction: Axis.horizontal,
-            children: filters.selectedBread!.keys.map((String filter) {
+            children: filters.selectedBread.keys.map((String filter) {
               return FilterChip(
                 label: Text(filter, style: const TextStyle(fontSize: 13)),
-                selected: filters.selectedBread![filter]!,
+                selected: filters.selectedBread[filter]!,
                 onSelected: (bool value) {
                   setState(() {
-                    filters.selectedBread![filter] = value;
+                    filters.selectedBread[filter] = value;
                     SharedPrefsLogic.setFilters(filters);
                   });
                 },
@@ -53,13 +53,13 @@ class _FiltersViewState extends State<FiltersView> {
             spacing: 5,
             alignment: WrapAlignment.center,
             direction: Axis.horizontal,
-            children: filters.selectedProtein!.keys.map((String filter) {
+            children: filters.selectedProtein.keys.map((String filter) {
               return FilterChip(
                 label: Text(filter, style: const TextStyle(fontSize: 12)),
-                selected: filters.selectedProtein![filter]!,
+                selected: filters.selectedProtein[filter]!,
                 onSelected: (bool value) {
                   setState(() {
-                    filters.selectedProtein![filter] = value;
+                    filters.selectedProtein[filter] = value;
                     SharedPrefsLogic.setFilters(filters);
                   });
                 },
@@ -88,13 +88,13 @@ class _FiltersViewState extends State<FiltersView> {
             spacing: 5,
             alignment: WrapAlignment.center,
             direction: Axis.horizontal,
-            children: filters.selectedCheese!.keys.map((String filter) {
+            children: filters.selectedCheese.keys.map((String filter) {
               return FilterChip(
                 label: Text(filter, style: const TextStyle(fontSize: 12)),
-                selected: filters.selectedCheese![filter]!,
+                selected: filters.selectedCheese[filter]!,
                 onSelected: (bool value) {
                   setState(() {
-                    filters.selectedCheese![filter] = value;
+                    filters.selectedCheese[filter] = value;
                     SharedPrefsLogic.setFilters(filters);
                   });
                 },
@@ -112,13 +112,13 @@ class _FiltersViewState extends State<FiltersView> {
             spacing: 5,
             alignment: WrapAlignment.center,
             direction: Axis.horizontal,
-            children: filters.selectedVeggies!.keys.map((String filter) {
+            children: filters.selectedVeggies.keys.map((String filter) {
               return FilterChip(
                 label: Text(filter, style: const TextStyle(fontSize: 12)),
-                selected: filters.selectedVeggies![filter]!,
+                selected: filters.selectedVeggies[filter]!,
                 onSelected: (bool value) {
                   setState(() {
-                    filters.selectedVeggies![filter] = value;
+                    filters.selectedVeggies[filter] = value;
                     SharedPrefsLogic.setFilters(filters);
                   });
                 },
@@ -146,13 +146,13 @@ class _FiltersViewState extends State<FiltersView> {
             spacing: 5,
             alignment: WrapAlignment.center,
             direction: Axis.horizontal,
-            children: filters.selectedSauce!.keys.map((String filter) {
+            children: filters.selectedSauce.keys.map((String filter) {
               return FilterChip(
                 label: Text(filter, style: const TextStyle(fontSize: 12)),
-                selected: filters.selectedSauce![filter]!,
+                selected: filters.selectedSauce[filter]!,
                 onSelected: (bool value) {
                   setState(() {
-                    filters.selectedSauce![filter] = value;
+                    filters.selectedSauce[filter] = value;
                     SharedPrefsLogic.setFilters(filters);
                   });
                 },
@@ -181,19 +181,19 @@ class _FiltersViewState extends State<FiltersView> {
             spacing: 5,
             alignment: WrapAlignment.center,
             direction: Axis.horizontal,
-            children: filters.selectedToppings!.keys.map((String filter) {
+            children: filters.selectedToppings.keys.map((String filter) {
               return FilterChip(
                 label: Text(filter, style: const TextStyle(fontSize: 12)),
-                selected: filters.selectedToppings![filter]!,
+                selected: filters.selectedToppings[filter]!,
                 onSelected: (bool value) {
                   setState(() {
-                    filters.selectedToppings![filter] = value;
+                    filters.selectedToppings[filter] = value;
                     SharedPrefsLogic.setFilters(filters);
                   });
                 },
               );
             }).toList()),
-                    Slider(
+        Slider(
           value: filters.numToppings.toDouble(),
           max: 5,
           divisions: 5,
