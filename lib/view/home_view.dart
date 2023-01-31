@@ -35,7 +35,8 @@ class _HomeViewState extends State<HomeView> {
                 child: CircularProgressIndicator(),
               );
             } else {
-              filters = Filters.fromJson(snapshot.data!['filters']);
+              var x = snapshot.data;
+              filters = Filters.fromJson(snapshot.data?['filters']);
               saved = snapshot.data!['saved'];
               // get a random sanwhich with the filters
               rngSammich = SammichLogic.rngSammich(filters);

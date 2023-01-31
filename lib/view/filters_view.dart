@@ -32,9 +32,10 @@ class _FiltersViewState extends State<FiltersView> {
             alignment: WrapAlignment.center,
             direction: Axis.horizontal,
             children: filters.selectedBread.keys.map((String filter) {
+              final selected = filters.selectedBread[filter] ?? false;
               return FilterChip(
                 label: Text(filter, style: const TextStyle(fontSize: 13)),
-                selected: filters.selectedBread[filter] ?? false,
+                selected: selected,
                 onSelected: (bool value) {
                   setState(() {
                     filters.selectedBread[filter] = value;

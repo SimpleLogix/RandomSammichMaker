@@ -80,16 +80,16 @@ class Filters {
 
   factory Filters.fromJson(Map<String, dynamic> json) {
     return Filters(
-      selectedBread: json['selectedBread'],
-      numProtein: json['numProtein'],
-      selectedProtein: json['selectedProtein'],
-      selectedCheese: json['selectedCheese'],
-      numVeggies: json['numVeggies'],
-      selectedVeggies: json['selectedVeggies'],
-      numSauce: json['numSauce'],
-      selectedSauce: json['selectedSauce'],
-      numToppings: json['numToppings'],
-      selectedToppings: json['selectedToppings'],
+      selectedBread: json['selectedBread'].cast<String, bool>(),
+      numProtein: json['numProtein'] as int,
+      selectedProtein: (json['selectedProtein']).cast<String, bool>(),
+      selectedCheese: (json['selectedCheese']).cast<String, bool>(),
+      numVeggies: json['numVeggies'] as int,
+      selectedVeggies: (json['selectedVeggies']).cast<String, bool>(),
+      numSauce: json['numSauce'] as int,
+      selectedSauce: (json['selectedSauce']).cast<String, bool>(),
+      numToppings: json['numToppings'] as int,
+      selectedToppings: (json['selectedToppings']).cast<String, bool>(),
     );
   }
 

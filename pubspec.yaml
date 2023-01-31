@@ -37,7 +37,6 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   shared_preferences: ^2.0.17 # for storing filters and history
-  flutter_svg: ^1.1.6
 
 
 dev_dependencies:

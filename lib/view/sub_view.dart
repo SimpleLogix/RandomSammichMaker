@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rsm/logic/shared_prefs.dart';
 import 'package:rsm/model/sammich.dart';
+import 'package:rsm/view/sammich_view.dart';
 
 class SubView extends StatefulWidget {
   Sammich sammich;
@@ -42,18 +43,22 @@ class _SubViewState extends State<SubView> {
                 color: Colors.amber[600],
               )),
         ),
-        Padding(
-          padding: const EdgeInsets.fromLTRB(20, 50, 20, 50),
-          child: Text(sammichText),
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(20, 50, 20, 50),
+            child: SammichView(sammich: widget.sammich),
+          ),
         ),
-        
-        TextButton(
-          child: Text("Clear"),
-          onPressed: () async {
-            isSaved = false;
-            widget.saved.clear();
-            SharedPrefsLogic.clear();
-          },
+        Padding(
+          padding: const EdgeInsets.fromLTRB(0, 0, 0, 100),
+          child: TextButton(
+            child: Text("Clear"),
+            onPressed: () async {
+              isSaved = false;
+              widget.saved.clear();
+              SharedPrefsLogic.clear();
+            },
+          ),
         ),
       ],
     );
